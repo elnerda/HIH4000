@@ -7,10 +7,10 @@
 #include "Arduino.h"
 #include "HIH4000.h"
 
-HIH4000::HIH4000(int pin,float tempC)
+HIH4000::HIH4000(int pin)
 { 
 	_pin=pin;
-	_tempC=tempC;
+	
 }
 
 float HIH4000::getHumidity()
@@ -24,7 +24,7 @@ float HIH4000::getHumidity()
 
 	return trueRH;
 }
-float HIH4000::getTrueHumidity()
+float HIH4000::getTrueHumidity(float tempC)
 {
 	float zero_offset = 0.826; //25°
 	float slope = 0.031483;    //25°
@@ -32,7 +32,7 @@ float HIH4000::getTrueHumidity()
 	float voltage = reading*5.0;
 	voltage/=1024.0;
 	float RH=(voltage-zero_offset)/slope;
-	float trueRH=(RH)/1.0546-0.0026*_tempC;
+	float trueRH=(RH)/1.0546-0.0026*tempC;
 
 	return trueRH;
 }
