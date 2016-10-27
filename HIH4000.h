@@ -13,12 +13,11 @@
 class HIH4000
 {
 	public:
-		HIH4000(int pin, float tempC);
+		HIH4000(int pin);
 		float getHumidity();
-		float getTrueHumidity();
+		float getTrueHumidity(float tempC);
 	private:
 		int _pin;
-		float _tempC;
 		float voltage;
 };
 #endif
